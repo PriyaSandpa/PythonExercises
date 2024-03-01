@@ -3,9 +3,15 @@ from tkinter import*
 def btn_click_red():
     btn_red["bg"]="red"
 
+def btn_click_blue():
+    btn_blue["bg"]="blue"
+
 window = Tk()
 
 btn_red= Button(window, text="Red!", command=btn_click_red)
 btn_red.pack()
+
+btn_blue= Button(window, text="Blue!", command=btn_click_blue)
+btn_blue.pack()
 
 window.mainloop()
