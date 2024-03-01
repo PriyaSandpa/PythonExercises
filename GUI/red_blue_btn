@@ -1,0 +1,11 @@
+from tkinter import*
+
+def btn_click_red():
+    btn_red["bg"]="red"
+
+window = Tk()
+
+btn_red= Button(window, text="Red!", command=btn_click_red)
+btn_red.pack()
+
+window.mainloop()
