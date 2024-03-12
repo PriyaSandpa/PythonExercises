@@ -1,0 +1,34 @@
+from tkinter import*
+
+name = []
+
+class Quiz_Starter:
+    def __init__(self, parent): #self-indicates that method is part of a class, parent=window 
+        background_colour = "OldLace"
+        #----------------Frame-----------------#
+        self.quiz_frame = Frame(parent, bg=background_colour, padx=100, pady=100) 
+        #self.objectname = widget(widget_platform, background_colour, padding)
+        self.quiz_frame.grid() #arrangement of items on the frame
+        #-----------------Heading-------------------#
+        self.heading_label = Label(self.quiz_frame, text="NZ Road Code", font=("Tw Cen MT", "18", "bold"), bg=background_colour)
+        self.heading_label.grid(row=0, padx=20)
+        #----------------Buttons?-------------------#
+        self.var1=IntVar() #holds value of radio buttons.
+        #---------------Label for Username---------#
+        self.user_label=Label(self.quiz_frame, text="Enter your username below:", font=("Tw Cen MT", "16"), bg=background_colour)
+        self.user_label.grid(row=1, padx=20, pady=20)
+        #---------------Entry Box-------------------#
+        self.entry_box= Entry(self.quiz_frame)
+        self.entry_box.grid(row=2, padx=20, pady=20)
+        #---------------Continue Button-------------#
+        self.continue_button=Button(self.quiz_frame, text="Continue", font=("Helvetica", "13", "bold"),bg="orange",command=self.name_collection)
+        self.continue_button.grid(row=3, padx=20, pady=20)
+    def name_collection(self):
+        name=self.entry_box.get()
+        name.append(name)
+        self.quiz_frame.destroy()
+if __name__== "__main__": #if the main python file is running
+    window=Tk() #window is tk window
+    window.title("Road Code Quiz") #name of the window
+    quiz_instance=Quiz_Starter(window) #making instance of/calling class "Quiz_Starter"
+    window.mainloop() #makes sure that window doesnt close until user closes it themselves.
