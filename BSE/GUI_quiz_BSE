@@ -21,7 +21,6 @@ def randomiser():
     elif qnum in asked:
         randomiser()
         
-randomiser()
 
 class Quiz_Starter:
     def __init__(self, parent): #self-indicates that method is part of a class, parent=window 
@@ -33,8 +32,29 @@ class Quiz_Starter:
         #-----------------Heading-------------------#
         self.heading_label = Label(self.quiz_frame, text="NZ Road Code", font=("Tw Cen MT", "18", "bold"), bg=background_colour)
         self.heading_label.grid(row=0, padx=20)
+        #--------------question----------------#
+        self.question_label=Label(self.quiz_frame, text=questions_answers[qnum][0], font=("Tw Cen MT", "16"), bg=background_colour)
+        self.question_label.grid(row=1, padx=10, pady=10)
         #----------------Buttons?-------------------#
         self.var1=IntVar() #holds value of radio buttons.
+        #Button 1
+        self.rb1=Radiobutton(self.quiz_frame, text=questions_answers[qnum][1], font=("Helvetica", "12"), bg=background_colour, value=1, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
+        self.rb1.grid(row=2, sticky=W)
+        #Button 2
+        self.rb1=Radiobutton(self.quiz_frame, text=questions_answers[qnum][2], font=("Helvetica", "12"), bg=background_colour, value=2, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
+        self.rb1.grid(row=3, sticky=W)
+        #Button 3
+        self.rb1=Radiobutton(self.quiz_frame, text=questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_colour, value=3, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
+        self.rb1.grid(row=4, sticky=W)
+        #Button 4
+        self.rb1=Radiobutton(self.quiz_frame, text=questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_colour, value=4, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
+        self.rb1.grid(row=5, sticky=W)     
+        #Confirm Button
+        self.quiz_instance= Button(self.quiz_frame, text="Confirm", font=("Helvetica", "13", "bold"), bg="SpringGreen3"), #command= self.test_progress)   
+        self.quiz_instance.grid(row=7, padx=5, pady=5)
+        #Score label
+        self.score_label=Label(self.quiz_frame, text="SCORE", font=("Tw Cen MT", "16"), bg=background_colour)
+        self.score_label.grid(row=8, padx=10, pady=1)
         #---------------Label for Username---------#
         self.user_label=Label(self.quiz_frame, text="Enter your username below:", font=("Tw Cen MT", "16"), bg=background_colour)
         self.user_label.grid(row=1, padx=20, pady=20)
@@ -49,6 +69,9 @@ class Quiz_Starter:
         name=self.entry_box.get()
         name.append(name)
         self.quiz_frame.destroy()
+        Quiz_Starter(window)
+
+randomiser()
 
 if __name__== "__main__": #if the main python file is running
     window=Tk() #window is tk window
