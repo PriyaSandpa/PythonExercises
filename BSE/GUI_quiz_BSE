@@ -1,6 +1,27 @@
 from tkinter import*
+import random
 
 name = []
+global questions_answers
+asked=[] #asked questions will be stored in this list so questions aren't repeated.
+score=0
+
+questions_answers={
+    1: ["Question1", "Op1", "Op2", "Op3", "Answer", 2],
+    2: ["Question2", "Op1", "Op2", "Op3", "Answer", 3],
+    3: ["Question3", "Op1", "Op2", "Op3", "Answer", 1],
+    4: ["Question4", "Op1", "Op2", "Op3", "Answer", 3]
+}
+
+def randomiser():
+    global qnum
+    qnum= random.randint(1,4)
+    if qnum not in asked:
+        asked.append(qnum)
+    elif qnum in asked:
+        randomiser()
+        
+randomiser()
 
 class Quiz_Starter:
     def __init__(self, parent): #self-indicates that method is part of a class, parent=window 
@@ -23,10 +44,12 @@ class Quiz_Starter:
         #---------------Continue Button-------------#
         self.continue_button=Button(self.quiz_frame, text="Continue", font=("Helvetica", "13", "bold"),bg="orange",command=self.name_collection)
         self.continue_button.grid(row=3, padx=20, pady=20)
+
     def name_collection(self):
         name=self.entry_box.get()
         name.append(name)
         self.quiz_frame.destroy()
+
 if __name__== "__main__": #if the main python file is running
     window=Tk() #window is tk window
     window.title("Road Code Quiz") #name of the window
