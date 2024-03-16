@@ -98,10 +98,11 @@ class Quiz:
                 self.quiz_instance.config(text="Confirm")
         else:
             if choice==0:
-                self.quiz_instance.config(text="You haven't picked an option. Try again: ")
+                self.quiz_instance.config(text="Invalid, try Again.")
                 choice=self.var1.get()
             else:
                 if choice == questions_answers[qnum][5]:
+                    score+=1
                     scr_label.config(text=score)
                     self.quiz_instance.config(text="Confirm")
                     self.questions_setup()
