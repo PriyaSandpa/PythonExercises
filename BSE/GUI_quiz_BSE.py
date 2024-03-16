@@ -1,16 +1,16 @@
-from tkinter import*
+from tkinter import *
 import random
 
-name = []
+names=[]
 global questions_answers
 asked=[] #asked questions will be stored in this list so questions aren't repeated.
 score=0
 
 questions_answers={
-    1: ["Question1", "Op1", "Op2", "Op3", "Answer", 2],
-    2: ["Question2", "Op1", "Op2", "Op3", "Answer", 3],
-    3: ["Question3", "Op1", "Op2", "Op3", "Answer", 1],
-    4: ["Question4", "Op1", "Op2", "Op3", "Answer", 3]
+    1: ["What's the capital of Australia?", "Sydney", "Canberra", "Vienna", "Canberra", 2],
+    2: ["How many countries are in Asia?", "56", "33", "48", "48", 3],
+    3: ["Where would you find Rotorua?", "New Zealand", "Cook Islands", "America", "New Zealand", 1],
+    4: ["Which one of the main islands (NZ) is the biggest? ", "North Island", "South Island", "Stewart Island", "South Island", 2]
 }
 
 def randomiser():
@@ -25,17 +25,39 @@ def randomiser():
 class Quiz_Starter:
     def __init__(self, parent): #self-indicates that method is part of a class, parent=window 
         background_colour = "OldLace"
-        #----------------Frame-----------------#
+        #Frame
         self.quiz_frame = Frame(parent, bg=background_colour, padx=100, pady=100) 
         #self.objectname = widget(widget_platform, background_colour, padding)
         self.quiz_frame.grid() #arrangement of items on the frame
-        #-----------------Heading-------------------#
+        #Heading
         self.heading_label = Label(self.quiz_frame, text="NZ Road Code", font=("Tw Cen MT", "18", "bold"), bg=background_colour)
         self.heading_label.grid(row=0, padx=20)
-        #--------------question----------------#
+        #Label for Username
+        self.user_label=Label(self.quiz_frame, text="Enter your username below:", font=("Tw Cen MT", "16"), bg=background_colour)
+        self.user_label.grid(row=1, padx=20, pady=20)
+        #Entry Box
+        self.entry_box= Entry(self.quiz_frame)
+        self.entry_box.grid(row=2, padx=20, pady=20)
+        #Continue Button
+        self.continue_button=Button(self.quiz_frame, text="Continue", font=("Helvetica", "13", "bold"),bg="orange",command=self.name_collection)
+        self.continue_button.grid(row=3, padx=20, pady=20)
+
+    def name_collection(self):
+        name=self.entry_box.get()
+        names.append(name)
+        self.quiz_frame.destroy()
+        Quiz(window)
+
+class Quiz:
+    def __init__(self, parent):
+        background_colour= "OldLace"
+        self.quiz_frame=Frame(parent, bg=background_colour, padx=40, pady=40)
+        #self.objectname = widget(widget_platform, background_colour, padding)
+        self.quiz_frame.grid() #arrangement of items on the frame
+        #question
         self.question_label=Label(self.quiz_frame, text=questions_answers[qnum][0], font=("Tw Cen MT", "16"), bg=background_colour)
         self.question_label.grid(row=1, padx=10, pady=10)
-        #----------------Buttons?-------------------#
+        #Buttons
         self.var1=IntVar() #holds value of radio buttons.
         #Button 1
         self.rb1=Radiobutton(self.quiz_frame, text=questions_answers[qnum][1], font=("Helvetica", "12"), bg=background_colour, value=1, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
@@ -50,26 +72,11 @@ class Quiz_Starter:
         self.rb1=Radiobutton(self.quiz_frame, text=questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_colour, value=4, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
         self.rb1.grid(row=5, sticky=W)     
         #Confirm Button
-        self.quiz_instance= Button(self.quiz_frame, text="Confirm", font=("Helvetica", "13", "bold"), bg="SpringGreen3"), #command= self.test_progress)   
+        self.quiz_instance= Button(self.quiz_frame, text="Confirm", font=("Helvetica", "13", "bold"), bg="SpringGreen3") #command= self.test_progress)   
         self.quiz_instance.grid(row=7, padx=5, pady=5)
         #Score label
         self.score_label=Label(self.quiz_frame, text="SCORE", font=("Tw Cen MT", "16"), bg=background_colour)
         self.score_label.grid(row=8, padx=10, pady=1)
-        #---------------Label for Username---------#
-        self.user_label=Label(self.quiz_frame, text="Enter your username below:", font=("Tw Cen MT", "16"), bg=background_colour)
-        self.user_label.grid(row=1, padx=20, pady=20)
-        #---------------Entry Box-------------------#
-        self.entry_box= Entry(self.quiz_frame)
-        self.entry_box.grid(row=2, padx=20, pady=20)
-        #---------------Continue Button-------------#
-        self.continue_button=Button(self.quiz_frame, text="Continue", font=("Helvetica", "13", "bold"),bg="orange",command=self.name_collection)
-        self.continue_button.grid(row=3, padx=20, pady=20)
-
-    def name_collection(self):
-        name=self.entry_box.get()
-        name.append(name)
-        self.quiz_frame.destroy()
-        Quiz_Starter(window)
 
 randomiser()
 
