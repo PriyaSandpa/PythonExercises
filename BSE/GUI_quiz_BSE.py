@@ -68,9 +68,6 @@ class Quiz:
         #Button 3
         self.rb3=Radiobutton(self.quiz_frame, text=questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_colour, value=3, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
         self.rb3.grid(row=4, sticky=W)
-        #Button 4
-        self.rb4=Radiobutton(self.quiz_frame, text=questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_colour, value=4, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
-        self.rb4.grid(row=5, sticky=W)     
         #Confirm Button
         self.quiz_instance= Button(self.quiz_frame, text="Confirm", font=("Helvetica", "13", "bold"), bg="SpringGreen3", command= self.test_progress)   
         self.quiz_instance.grid(row=7, padx=5, pady=5)
@@ -85,7 +82,6 @@ class Quiz:
         self.rb1.config(text=questions_answers[qnum][1])
         self.rb2.config(text=questions_answers[qnum][2])
         self.rb3.config(text=questions_answers[qnum][3])
-        self.rb4.config(text=questions_answers[qnum][4])
 
     def test_progress(self):
         global score
