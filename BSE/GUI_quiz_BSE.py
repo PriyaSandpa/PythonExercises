@@ -30,7 +30,7 @@ class Quiz_Starter:
         #self.objectname = widget(widget_platform, background_colour, padding)
         self.quiz_frame.grid() #arrangement of items on the frame
         #Heading
-        self.heading_label = Label(self.quiz_frame, text="NZ Road Code", font=("Tw Cen MT", "18", "bold"), bg=background_colour)
+        self.heading_label = Label(self.quiz_frame, text="Basic Geography Quiz", font=("Tw Cen MT", "18", "bold"), bg=background_colour)
         self.heading_label.grid(row=0, padx=20)
         #Label for Username
         self.user_label=Label(self.quiz_frame, text="Enter your username below:", font=("Tw Cen MT", "16"), bg=background_colour)
@@ -115,6 +115,6 @@ randomiser()
 
 if __name__== "__main__": #if the main python file is running
     window=Tk() #window is tk window
-    window.title("Road Code Quiz") #name of the window
+    window.title("Geography Quiz") #name of the window
     quiz_instance=Quiz_Starter(window) #making instance of/calling class "Quiz_Starter"
     window.mainloop() #makes sure that window doesnt close until user closes it themselves.
