@@ -63,20 +63,57 @@ class Quiz:
         self.rb1=Radiobutton(self.quiz_frame, text=questions_answers[qnum][1], font=("Helvetica", "12"), bg=background_colour, value=1, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
         self.rb1.grid(row=2, sticky=W)
         #Button 2
-        self.rb1=Radiobutton(self.quiz_frame, text=questions_answers[qnum][2], font=("Helvetica", "12"), bg=background_colour, value=2, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
-        self.rb1.grid(row=3, sticky=W)
+        self.rb2=Radiobutton(self.quiz_frame, text=questions_answers[qnum][2], font=("Helvetica", "12"), bg=background_colour, value=2, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
+        self.rb2.grid(row=3, sticky=W)
         #Button 3
-        self.rb1=Radiobutton(self.quiz_frame, text=questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_colour, value=3, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
-        self.rb1.grid(row=4, sticky=W)
+        self.rb3=Radiobutton(self.quiz_frame, text=questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_colour, value=3, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
+        self.rb3.grid(row=4, sticky=W)
         #Button 4
-        self.rb1=Radiobutton(self.quiz_frame, text=questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_colour, value=4, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
-        self.rb1.grid(row=5, sticky=W)     
+        self.rb4=Radiobutton(self.quiz_frame, text=questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_colour, value=4, padx=10, pady=10, variable=self.var1, indicator=0, background="light blue")
+        self.rb4.grid(row=5, sticky=W)     
         #Confirm Button
-        self.quiz_instance= Button(self.quiz_frame, text="Confirm", font=("Helvetica", "13", "bold"), bg="SpringGreen3") #command= self.test_progress)   
+        self.quiz_instance= Button(self.quiz_frame, text="Confirm", font=("Helvetica", "13", "bold"), bg="SpringGreen3", command= self.test_progress)   
         self.quiz_instance.grid(row=7, padx=5, pady=5)
         #Score label
         self.score_label=Label(self.quiz_frame, text="SCORE", font=("Tw Cen MT", "16"), bg=background_colour)
         self.score_label.grid(row=8, padx=10, pady=1)
+    
+    def questions_setup(self):
+        randomiser()
+        self.var1.set(0)
+        self.question_label.config(text=questions_answers[qnum][0])
+        self.rb1.config(text=questions_answers[qnum][1])
+        self.rb2.config(text=questions_answers[qnum][2])
+        self.rb3.config(text=questions_answers[qnum][3])
+        self.rb4.config(text=questions_answers[qnum][4])
+
+    def test_progress(self):
+        global score
+        scr_label=self.score_label
+        choice=self.var1.get()
+        if len(asked)>3: #determine if it's last  question.
+            if choice==questions_answers[qnum][5]:
+                score+=1
+                scr_label.config(text=score)
+                self.quiz_instance.config(text="Confirm")
+            else:
+                score+=0
+                scr_label.config(text="Incorrect. The correct answer is: " + questions_answers[qnum][4])
+                self.quiz_instance.config(text="Confirm")
+        else:
+            if choice==0:
+                self.quiz_instance.config(text="You haven't picked an option. Try again: ")
+                choice=self.var1.get()
+            else:
+                if choice == questions_answers[qnum][5]:
+                    scr_label.config(text=score)
+                    self.quiz_instance.config(text="Confirm")
+                    self.questions_setup()
+                else:
+                    score+=0
+                    scr_label.config(text="The correct answer was: " + questions_answers[qnum][4])
+                    self.quiz_instance.config(text="Confirm")
+                    self.questions_setup()
 
 randomiser()
 
