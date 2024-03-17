@@ -93,6 +93,11 @@ class Quiz:
                 self.quiz_instance.config(text="Confirm")
                 self.quiz_frame.destroy()
                 Final_Score(window)
+
+            elif choice==0:
+                self.quiz_instance.config(text="Invalid, try Again.")
+                choice=self.var1.get()
+                
             else:
                 score+=0
                 scr_label.config(text="Incorrect. The correct answer is: " + questions_answers[qnum][4])
