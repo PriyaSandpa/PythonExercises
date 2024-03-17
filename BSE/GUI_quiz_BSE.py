@@ -5,7 +5,7 @@ names=[]
 global questions_answers
 asked=[] #asked questions will be stored in this list so questions aren't repeated.
 score=0
-background_colour="Old Lace"
+background_colour="OldLace"
 
 questions_answers={
     1: ["What's the capital of Australia?", "Sydney", "Canberra", "Vienna", "Canberra", 2],
@@ -92,11 +92,13 @@ class Quiz:
                 scr_label.config(text=score)
                 self.quiz_instance.config(text="Confirm")
                 self.quiz_frame.destroy()
+                Final_Score(window)
             else:
                 score+=0
                 scr_label.config(text="Incorrect. The correct answer is: " + questions_answers[qnum][4])
                 self.quiz_instance.config(text="Confirm")
                 self.quiz_frame.destroy()
+                Final_Score(window)
         else:
             if choice==0:
                 self.quiz_instance.config(text="Invalid, try Again.")
@@ -113,7 +115,17 @@ class Quiz:
                     self.quiz_instance.config(text="Confirm")
                     self.questions_setup()
 
-    
+class Final_Score:
+    def __init__ (self, parent):
+        self.score_frame=Frame(parent, bg=background_colour, padx=100, pady=100)
+        #self.objectname = widget(widget_platform, background_colour, padding)
+        self.score_frame.grid() #arrangement of items on the frame
+        #Display Score
+        self.final_score_label = Label(self.score_frame, text="You scored:\n "+ str(score), font=("Tw Cen MT", "22", "bold"), bg=background_colour)
+        self.final_score_label.grid(row=0, padx=20)
+        #Play Again Button
+        self.restart_button=Button(self.score_frame, bg="orange", text="Play Again", font=("Helvetica", "13", "bold"), command=lambda:[self.score_frame.destroy(), Quiz_Starter(window)]) 
+        self.restart_button.grid(row=3, padx=20, pady=20)
 
 randomiser()
 
