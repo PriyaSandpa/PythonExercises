@@ -5,6 +5,7 @@ names=[]
 global questions_answers
 asked=[] #asked questions will be stored in this list so questions aren't repeated.
 score=0
+background_colour="Old Lace"
 
 questions_answers={
     1: ["What's the capital of Australia?", "Sydney", "Canberra", "Vienna", "Canberra", 2],
@@ -24,7 +25,6 @@ def randomiser():
 
 class Quiz_Starter:
     def __init__(self, parent): #self-indicates that method is part of a class, parent=window 
-        background_colour = "OldLace"
         #Frame
         self.quiz_frame = Frame(parent, bg=background_colour, padx=100, pady=100) 
         #self.objectname = widget(widget_platform, background_colour, padding)
@@ -50,7 +50,6 @@ class Quiz_Starter:
 
 class Quiz:
     def __init__(self, parent):
-        background_colour= "OldLace"
         self.quiz_frame=Frame(parent, bg=background_colour, padx=40, pady=40)
         #self.objectname = widget(widget_platform, background_colour, padding)
         self.quiz_frame.grid() #arrangement of items on the frame
@@ -92,10 +91,12 @@ class Quiz:
                 score+=1
                 scr_label.config(text=score)
                 self.quiz_instance.config(text="Confirm")
+                self.quiz_frame.destroy()
             else:
                 score+=0
                 scr_label.config(text="Incorrect. The correct answer is: " + questions_answers[qnum][4])
                 self.quiz_instance.config(text="Confirm")
+                self.quiz_frame.destroy()
         else:
             if choice==0:
                 self.quiz_instance.config(text="Invalid, try Again.")
@@ -111,6 +112,8 @@ class Quiz:
                     scr_label.config(text="The correct answer was: " + questions_answers[qnum][4])
                     self.quiz_instance.config(text="Confirm")
                     self.questions_setup()
+
+    
 
 randomiser()
 
